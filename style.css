@@ -1,0 +1,35 @@
+@@charset "UTF-8";
+body {
+  background-image: url(images/CorkBoard.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+/* h1 {
+  color: #0bd;
+}
+p {
+  font-size: 20px;
+}
+.box24 {
+    position: relative;
+    padding: 0.5em 0.7em;
+    margin: 2em 0;
+    background: #e6f4ff;
+    color: #5c98d4;
+    font-weight: bold;
+}
+.box24:after {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 30px;
+    border: 15px solid transparent;
+    border-top: 15px solid #e6f4ff;
+    width: 0;
+    height: 0;
+}
+.box24 p {
+    margin: 0;
+    padding: 0;
+} */
