@@ -3,3 +3,8 @@ node_modules
 package-lock.json
 *.log
 *.gz
+
+# local env files
+.env
+.env.local
+.env.*.local
