@@ -1,8 +1,19 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@charset "UTF-8";
+@font-face {
+	font-family: 'WoodFont';
+	src: url(drift-wood-font/DriftWood-z8W4.ttf);
 }
 
-a {
-  color: #00B7FF;
+body {
+  font-family: WoodFont;
+  background-image: url(images/CorkBoard.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+h1 {
+  color: #0bd;
+}
+p {
+  font-size: 20px;
 }
