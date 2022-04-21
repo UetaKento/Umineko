@@ -38,5 +38,18 @@ router.post('/post', function (req, res, next) {
   });
   res.redirect('/post');
 });
+router.get('/show', function (req, res, next) {
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM idea_info', function (err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+      console.log(rows);
+      res.render('show_ideas', { title: 'Ideas', ideas: rows });
+    });
+  });
+});
 
 module.exports = router;
