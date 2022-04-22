@@ -13,12 +13,19 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Home' });
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM idea_info', function (err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+      console.log(rows);
+      res.render('index', { ideas: rows });
+    });
+  });
 });
-router.get('/post', function (req, res, next) {
-  res.render('post_idea', { title: 'Post' });
-});
-router.post('/post', function (req, res, next) {
+router.post('/', function (req, res, next) {
   const idea = {
     comp_id: -1,
     title: req.body.title,
@@ -36,20 +43,7 @@ router.post('/post', function (req, res, next) {
       connection.release();
     });
   });
-  res.redirect('/post');
-});
-router.get('/show', function (req, res, next) {
-  pool.getConnection(function (err, connection) {
-    connection.query('SELECT * FROM idea_info', function (err, rows, fields) {
-      if (err) {
-        console.log('error: ', err);
-        throw err;
-      }
-      connection.release();
-      console.log(rows);
-      res.render('show_ideas', { title: 'Ideas', ideas: rows });
-    });
-  });
+  res.redirect('/');
 });
 
 module.exports = router;
