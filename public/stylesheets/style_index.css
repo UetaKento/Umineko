@@ -106,7 +106,7 @@ a:hover {
 .idea {
   margin: 10px;
   padding: 10px;
-  display: inline-block;
+  /* display: inline-block; */
   word-break: break-all;
 }
 .genre {
@@ -173,14 +173,14 @@ a:hover {
   background-color: #F5DE6F;
 }
 .form .circleBottomL {
-  top: 60%;
+  top: 45%;
   width: 8%;
   height: 5%;
   border: solid 3px #F5DE6F;
   background-color: #F5DE6F;
 }
 .form .circleBottomR {
-  top: 55%;
+  top: 40%;
   width: 8%;
   height: 5%;
   border: solid 3px #F5DE6F;
