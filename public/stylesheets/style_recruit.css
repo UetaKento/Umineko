@@ -106,7 +106,7 @@ a:hover {
 .idea {
   margin: 15px;
   padding: 15px;
-  display: inline-block;
+  /* display: inline-block; */
   word-break: break-all;
 }
 .genre {
