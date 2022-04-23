@@ -38,6 +38,19 @@ router.post('/', function (req, res, next) {
     email: req.body.email
   };
 
+  const spaces = ["\t", "\n", "\r", " ", "　"];
+  const tags = [];
+  const sec = req.body.content.split("#");
+  for (let i = 1; i < sec.length; ++i) {
+    if (sec[i].length) {
+      for (c of spaces) {
+        sec[i] = sec[i].replaceAll(c, " ");
+      }
+      sec[i] = sec[i].split(" ");
+      if (sec[i][0].length) tags.push(sec[i][0]);
+    }
+  }
+
   pool.getConnection(function (err, connection) {
     connection.query('INSERT INTO idea_info SET ?', idea, function (err, res) {
       if (err) {
