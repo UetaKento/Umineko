@@ -11,6 +11,8 @@ var pool = mysql.createPool({
 var express = require('express');
 var router = express.Router();
 
+var colors = ["black", "green", "blue", "red", "yellow", "purple"];
+
 //通常ページ
 router.get('/', function (req, res, next) {
   pool.getConnection(function (err, connection) {
@@ -20,6 +22,9 @@ router.get('/', function (req, res, next) {
         throw err;
       }
       connection.release();
+      for (let i = 0; i < rows.length; ++i) {
+        rows[i]["color"] = colors[i % colors.length];
+      }
       res.render('index', { ideas: rows });
     });
   });
@@ -54,6 +59,9 @@ router.get('/recruit', function (req, res, next) {
         throw err;
       }
       connection.release();
+      for (let i = 0; i < rows.length; ++i) {
+        rows[i]["color"] = colors[i % colors.length];
+      }
       res.render('recruit', { comps: rows });
     });
   });
