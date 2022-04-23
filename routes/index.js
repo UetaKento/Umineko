@@ -11,7 +11,7 @@ var pool = mysql.createPool({
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+//通常ページ
 router.get('/', function (req, res, next) {
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM idea_info', function (err, rows, fields) {
@@ -20,7 +20,6 @@ router.get('/', function (req, res, next) {
         throw err;
       }
       connection.release();
-      console.log(rows);
       res.render('index', { ideas: rows });
     });
   });
@@ -44,6 +43,44 @@ router.post('/', function (req, res, next) {
     });
   });
   res.redirect('/');
+});
+
+//企業公募ページ
+router.get('/recruit', function (req, res, next) {
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM comp_info', function (err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+      res.render('recruit', { comps: rows });
+    });
+  });
+});
+
+//企業用お題投稿ページ
+router.get('/post_theme', function (req, res, next) {
+  res.render('post_theme');
+});
+router.post('/post_theme', function (req, res, next) {
+  const theme = {
+    title: req.body.title,
+    content: req.body.content,
+    company: req.body.company,
+    email: req.body.email
+  };
+
+  pool.getConnection(function (err, connection) {
+    connection.query('INSERT INTO comp_info SET ?', theme, function (err, res) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+    });
+  });
+  res.redirect('/recruit');
 });
 
 module.exports = router;
