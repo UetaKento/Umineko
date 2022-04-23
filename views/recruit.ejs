@@ -128,13 +128,14 @@
             <p>
               <%= comp.company %>
             </p>
-            <p>　</p>
             <p>投稿フォーム</p>
-            <p>　</p>
-            <p>　</p>
-            <p>　</p>
-            <p>　</p>
-            <p>　</p>
+            <form action="/post_to_comp/<%=comp.comp_id%>" method="post">
+              <input type="text" name="title" placeholder="title">
+              <input type="text" name="content" placeholder="content">
+              <input type="text" name="username" placeholder="username">
+              <input type="text" name="email" placeholder="email">
+              <input type="submit" value="送信！">
+            </form>
           </div><br>
           <% }); %>
             <!-- <footer>
@@ -180,6 +181,8 @@
       </div> -->
     <div class="transform">
       <a href="/">共有ページへ</a>
+      <br>
+      <a href="/post_theme">お題投稿ページへ</a>
     </div>
   </div>
 </body>

@@ -14,7 +14,7 @@ var router = express.Router();
 //通常ページ
 router.get('/', function (req, res, next) {
   pool.getConnection(function (err, connection) {
-    connection.query('SELECT * FROM idea_info', function (err, rows, fields) {
+    connection.query('SELECT * FROM idea_info WHERE comp_id=-1', function (err, rows, fields) {
       if (err) {
         console.log('error: ', err);
         throw err;
@@ -57,6 +57,26 @@ router.get('/recruit', function (req, res, next) {
       res.render('recruit', { comps: rows });
     });
   });
+});
+router.post('/post_to_comp/:compId', function (req, res, next) {
+  const idea = {
+    comp_id: req.params.compId,
+    title: req.body.title,
+    content: req.body.content,
+    username: req.body.username,
+    email: req.body.email
+  };
+
+  pool.getConnection(function (err, connection) {
+    connection.query('INSERT INTO idea_info SET ?', idea, function (err, res) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+    });
+  });
+  res.redirect("/recruit");
 });
 
 //企業用お題投稿ページ
