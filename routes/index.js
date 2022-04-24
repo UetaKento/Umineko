@@ -73,11 +73,21 @@ router.get('/', function (req, res, next) {
         console.log('error: ', err);
         throw err;
       }
-      connection.release();
       for (let i = 0; i < rows.length; ++i) {
         rows[i]["color"] = colors[i % colors.length];
       }
-      res.render('index', { ideas: rows });
+      connection.query('SELECT DISTINCT tag FROM tag_info', function (err, rows2, fields) {
+        if (err) {
+          console.log('error: ', err);
+          throw err;
+        }
+        connection.release();
+        const tags = [];
+        for (let i = 0; i < rows2.length; ++i) {
+          tags.push(rows2[i]["tag"]);
+        }
+        res.render('index', { ideas: rows, tags: tags });
+      });
     });
   });
 });
@@ -98,11 +108,21 @@ router.get('/tag_filter/:tag', function (req, res, next) {
         console.log('error: ', err);
         throw err;
       }
-      connection.release();
       for (let i = 0; i < rows.length; ++i) {
         rows[i]["color"] = colors[i % colors.length];
       }
-      res.render('index', { ideas: rows });
+      connection.query('SELECT DISTINCT tag FROM tag_info', function (err, rows2, fields) {
+        if (err) {
+          console.log('error: ', err);
+          throw err;
+        }
+        connection.release();
+        const tags = [];
+        for (let i = 0; i < rows2.length; ++i) {
+          tags.push(rows2[i]["tag"]);
+        }
+        res.render('index', { ideas: rows, tags: tags });
+      });
     });
   });
 });

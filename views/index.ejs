@@ -38,24 +38,13 @@
       <div class="circleTopR"></div>
       <h3>ジャンル</h3>
       <ul class="genre">
-        <li>
-          <a href="#">食べ物</a>
-        </li>
-        <li>
-          <a href="#">おもちゃ</a>
-        </li>
-        <li>
-          <a href="#">アプリ</a>
-        </li>
-        <li>
-          <a href="#">音楽</a>
-        </li>
-        <li>
-          <a href="#">機械</a>
-        </li>
-        <li>
-          <a href="#">その他</a>
-        </li>
+        <% tags.forEach(tag=> { %>
+          <li>
+            <a href="/tag_filter/<%= tag%>">
+              <%= tag %>
+            </a>
+          </li>
+          <% }); %>
       </ul>
       <form action="/tag_filter" method="post">
         <p><label for="tag">タグを入力</label></p>
