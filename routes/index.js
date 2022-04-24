@@ -86,7 +86,7 @@ router.get('/', function (req, res, next) {
         for (let i = 0; i < rows2.length; ++i) {
           tags.push(rows2[i]["tag"]);
         }
-        res.render('index', { ideas: rows, tags: tags });
+        res.render('index', { ideas: rows, tags: tags, current_tag: "なし" });
       });
     });
   });
@@ -121,7 +121,7 @@ router.get('/tag_filter/:tag', function (req, res, next) {
         for (let i = 0; i < rows2.length; ++i) {
           tags.push(rows2[i]["tag"]);
         }
-        res.render('index', { ideas: rows, tags: tags });
+        res.render('index', { ideas: rows, tags: tags, current_tag: req.params.tag });
       });
     });
   });
