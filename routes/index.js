@@ -13,25 +13,9 @@ var router = express.Router();
 
 var colors = ["black", "green", "blue", "red", "yellow", "purple"];
 
-//通常ページ
-router.get('/', function (req, res, next) {
-  pool.getConnection(function (err, connection) {
-    connection.query('SELECT * FROM idea_info WHERE comp_id=-1', function (err, rows, fields) {
-      if (err) {
-        console.log('error: ', err);
-        throw err;
-      }
-      connection.release();
-      for (let i = 0; i < rows.length; ++i) {
-        rows[i]["color"] = colors[i % colors.length];
-      }
-      res.render('index', { ideas: rows });
-    });
-  });
-});
-router.post('/', function (req, res, next) {
+const post_idea = function (req) {
   const idea = {
-    comp_id: -1,
+    comp_id: req.params.compId ?? -1,
     title: req.body.title,
     content: req.body.content,
     username: req.body.username,
@@ -79,7 +63,49 @@ router.post('/', function (req, res, next) {
     });
     connection.release();
   });
+}
+
+//通常ページ
+router.get('/', function (req, res, next) {
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM idea_info WHERE comp_id=-1', function (err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+      for (let i = 0; i < rows.length; ++i) {
+        rows[i]["color"] = colors[i % colors.length];
+      }
+      res.render('index', { ideas: rows });
+    });
+  });
+});
+router.post('/', function (req, res, next) {
+  post_idea(req);
   res.redirect('/');
+});
+router.get('/tag_filter/:tag', function (req, res, next) {
+  pool.getConnection(function (err, connection) {
+    connection.query(
+      'SELECT * FROM idea_info\
+      JOIN tag_info ON idea_info.idea_id = tag_info.idea_id\
+      WHERE comp_id = -1 AND tag = ?;', [req.params.tag], function (err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      connection.release();
+      for (let i = 0; i < rows.length; ++i) {
+        rows[i]["color"] = colors[i % colors.length];
+      }
+      res.render('index', { ideas: rows });
+    });
+  });
+});
+router.post('/tag_filter/:tag', function (req, res, next) {
+  post_idea(req);
+  res.redirect('/tag_filter/' + req.params.tag);
 });
 
 //企業公募ページ
@@ -99,23 +125,7 @@ router.get('/recruit', function (req, res, next) {
   });
 });
 router.post('/post_to_comp/:compId', function (req, res, next) {
-  const idea = {
-    comp_id: req.params.compId,
-    title: req.body.title,
-    content: req.body.content,
-    username: req.body.username,
-    email: req.body.email
-  };
-
-  pool.getConnection(function (err, connection) {
-    connection.query('INSERT INTO idea_info SET ?', idea, function (err, res) {
-      if (err) {
-        console.log('error: ', err);
-        throw err;
-      }
-      connection.release();
-    });
-  });
+  post_idea(req);
   res.redirect("/recruit");
 });
 
