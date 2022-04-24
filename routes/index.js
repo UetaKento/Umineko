@@ -57,8 +57,27 @@ router.post('/', function (req, res, next) {
         console.log('error: ', err);
         throw err;
       }
-      connection.release();
     });
+    connection.query('SELECT last_insert_id() FROM comp_info', function (err, rows, fields) {
+      if (err) {
+        console.log('error: ', err);
+        throw err;
+      }
+      const id = rows[0]["last_insert_id()"];
+      for (t of tags) {
+        const tag_data = {
+          idea_id: id,
+          tag: t
+        };
+        connection.query('INSERT INTO tag_info SET ?', tag_data, function (err, res) {
+          if (err) {
+            console.log('error: ', err);
+            throw err;
+          }
+        });
+      }
+    });
+    connection.release();
   });
   res.redirect('/');
 });
