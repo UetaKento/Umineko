@@ -42,7 +42,7 @@ const post_idea = function (req) {
         throw err;
       }
     });
-    connection.query('SELECT last_insert_id() FROM comp_info', function (err, rows, fields) {
+    connection.query('SELECT last_insert_id() FROM idea_info', function (err, rows, fields) {
       if (err) {
         console.log('error: ', err);
         throw err;
