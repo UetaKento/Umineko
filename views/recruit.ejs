@@ -122,6 +122,38 @@
               </div>
             </form>
           </div><br>
+          <% comps.forEach(comp=> { %>
+          <div class="sticky <%= comp.color %> idea">
+            <p>Title</p>
+            <p>
+              <%= comp.title %>
+            </p>
+            <p>Content</p>
+            <p>
+              <%= comp.content %>
+            </p>
+            <p>Name</p>
+            <p>
+              <%= comp.company %>
+            </p>
+            <p>投稿フォーム</p>
+            <form action="/post_to_comp/<%=comp.comp_id%>" method="post">
+              <div class="leftInput">
+                <p><label for="title">タイトル</label></p>
+                <p><input type="text" name="title" placeholder="(例)〇〇ドリンク" id="title" class="formDesign"></p>
+                <p><label for="username">名前</label></p>
+                <p><input type="text" name="username" placeholder="(例)サポ　次郎" id="username" class="formDesign"></p>
+                <p><label for="email">メールアドレス</label></p>
+                <p><input type="text" name="email" placeholder="(例)example.gmail.com" id="email" class="formDesign"></p>
+              </div>
+              <div class="rightInput">
+                <p><label for="content">内容</label></p>
+                <p><textarea name="content" rows="6" cols="40" type="text" placeholder="(例)飲むと元気に！" id="content" class="formDesign"></textarea></p>
+                <input type="submit" value="送信！" class="submitButton">
+              </div>
+            </form>
+          </div><br>
+          <% }); %>
         </div>
       </article>
       <aside>
@@ -153,7 +185,11 @@
       </aside>
       <div class="transform">
         <a href="index.ejs">共有ページへ</a>
+        <br>
+        <a href="/post_theme">お題投稿ページへ</a>
       </div>
     </div>
-    </body>
+  </div>
+</body>
+
 </html>
