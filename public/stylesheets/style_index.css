@@ -64,19 +64,19 @@ aside {
   color: #000;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
-.form {
+.share {
   position: fixed;
   right: 5%;
   width: 20%;
-  height: 50%;
+  height: 80%;
   background: #fff;
   color: #000;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
 .transform {
   position: fixed;
-  top: 77%;
-  right: 5%;
+  top: 79%;
+  left: 5%;
   width: 20%;
   height: 10%;
   text-align: center;
@@ -158,27 +158,26 @@ a:hover {
   border: solid 3px #FF3939;
   background-color: #FF3939;
 }
-.form .circleTopL {
+.share .circleTopL {
   width: 8%;
   height: 5%;
   border: solid 3px #F5DE6F;
   background-color: #F5DE6F;
 }
-.form .circleTopR {
+.share .circleTopR {
   width: 8%;
   height: 5%;
   border: solid 3px #F5DE6F;
   background-color: #F5DE6F;
 }
-.form .circleBottomL {
-  top: 45%;
+.share .circleBottomL {
+  top: 10%;
   width: 8%;
   height: 5%;
   border: solid 3px #F5DE6F;
   background-color: #F5DE6F;
 }
-.form .circleBottomR {
-  top: 40%;
+.share .circleBottomR {
   width: 8%;
   height: 5%;
   border: solid 3px #F5DE6F;
@@ -189,4 +188,20 @@ footer {
   bottom: 0;
   background-color: #7F3102;
   padding: 26px 0;
+}
+form {
+  text-align: center;
+}
+form .formDesign{
+  margin: 8px;
+  border: 1px solid #000;
+}
+form .submitButton{
+  margin: 10px;
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 10%;
+}
+.submitButton:hover {
+  color:#FF0099;
 }

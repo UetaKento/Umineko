@@ -64,15 +64,7 @@ aside {
   color: #000;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
-.form {
-  position: fixed;
-  right: 5%;
-  width: 20%;
-  height: 50%;
-  background: #fff;
-  color: #000;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
-}
+
 .transform {
   position: fixed;
   top: 79%;
@@ -104,7 +96,7 @@ a:hover {
 .idea {
   margin: 15px;
   padding: 15px;
-  /* display: inline-block; */
+  display: inline-block;
   word-break: break-all;
 }
 .genre {
@@ -158,35 +150,26 @@ a:hover {
   border: solid 3px #FF3939;
   background-color: #FF3939;
 }
-.form .circleTopL {
-  width: 8%;
-  height: 5%;
-  border: solid 3px #F5DE6F;
-  background-color: #F5DE6F;
+form {
+  text-align: center;
+  color: #000;
+  display: flex;
+  justify-content: space-around;
 }
-.form .circleTopR {
-  width: 8%;
-  height: 5%;
-  border: solid 3px #F5DE6F;
-  background-color: #F5DE6F;
+form .formDesign{
+  margin: 8px;
+  border: 1px solid #000;
 }
-.form .circleBottomL {
-  top: 60%;
-  width: 8%;
-  height: 5%;
-  border: solid 3px #F5DE6F;
-  background-color: #F5DE6F;
+form .submitButton{
+  margin: 10px;
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 10%;
 }
-.form .circleBottomR {
-  top: 55%;
-  width: 8%;
-  height: 5%;
-  border: solid 3px #F5DE6F;
-  background-color: #F5DE6F;
+.submitButton:hover {
+  color:#FF0099;
 }
-footer {
-  position: relative;
-  bottom: 0;
-  background-color: #7F3102;
-  padding: 26px 0;
+.formString {
+  text-align: center;
+  color: #000;
 }
