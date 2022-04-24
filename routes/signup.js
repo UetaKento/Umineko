@@ -30,7 +30,7 @@ router.post('/signup', function (req, res, next) {
         connection.release();
       });
     });
-    res.redirect('/');
+    res.redirect('/login');
   });
 
   module.exports = router;
