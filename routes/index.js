@@ -85,6 +85,9 @@ router.post('/', function (req, res, next) {
   post_idea(req);
   res.redirect('/');
 });
+router.post('/tag_filter', function (req, res, next) {
+  res.redirect('/tag_filter/' + req.body.nexttag);
+});
 router.get('/tag_filter/:tag', function (req, res, next) {
   pool.getConnection(function (err, connection) {
     connection.query(
