@@ -1,17 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <title>アイデア創出アプリ</title>
-  <meta name="description" content="気楽にアイデアを投稿しよう！">
+  <meta name="description" content="アイデアのヒントになる場所">
   <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/stylesheets/style_index.css">
 </head>
 
 <body>
-  <h1>IDEAAAAAA</h1>
-  <p>Create</p>
+  <h1>アイデア共有スペース</h1>
+  <h2>ジャンル：<%= current_tag %>
+  </h2>
+  <div class="maincontents">
+    <article>
+      <div class="twitch">
+        <% ideas.forEach(idea=> { %>
+          <div class="sticky <%= idea.color%> idea">
+            <p>Title</p>
+            <p>
+              <%= idea.title %>
+            </p>
+            <p>Content</p>
+            <p>
+              <%= idea.content %>
+            </p>
+            <p>Name</p>
+            <p>
+              <%= idea.username %>
+            </p>
+          </div><br>
+          <% }); %>
+      </div>
+    </article>
+    <aside>
+      <div class="circleTopL"></div>
+      <div class="circleTopR"></div>
+      <h3>ジャンル</h3>
+      <ul class="genre">
+        <li>
+          <a href="/">ジャンルなし</a>
+        </li>
+        <% tags.forEach(tag=> { %>
+          <li>
+            <a href="/tag_filter/<%= tag%>">
+              <%= tag %>
+            </a>
+          </li>
+          <% }); %>
+      </ul>
+      <form action="/tag_filter" method="post">
+        <p><label for="tag">タグを入力</label></p>
+        <p><input type="text" name="nexttag" placeholder="(例)食べ物" id="tag" class="formDesign"></p>
+        <input type="submit" value="検索！" class="submitButton">
+      </form>
+      <!-- <div class="circleBottomL"></div>
+        <div class="circleBottomR"></div> -->
+    </aside>
+    <div class="share">
+      <div class="circleTopL"></div>
+      <div class="circleTopR"></div>
+      <h3>投稿フォーム</h3>
+      <form method="post">
+        <p><label for="title">タイトル</label></p>
+        <p><input type="text" name="title" placeholder="(例)〇〇ドリンク" id="title" class="formDesign"></p>
+        <p><label for="content">内容</label></p>
+        <p><textarea name="content" rows="6" cols="25" type="text" placeholder="(例)飲むと元気に！" id="content"
+            class="formDesign"></textarea></p>
+        <p><label for="username">名前</label></p>
+        <p><input type="text" name="username" placeholder="(例)サポ　次郎" id="username" class="formDesign"></p>
+        <p><label for="email">メールアドレス</label></p>
+        <p><input type="text" name="email" placeholder="(例)example.gmail.com" id="email" class="formDesign"></p>
+        <input type="submit" value="送信！" class="submitButton">
+      </form>
+      <!-- <div class="circleBottomL"></div>
+        <div class="circleBottomR"></div> -->
+    </div>
+    <div class="transform">
+      <a href="/recruit">募集ページへ</a>
+    </div>
+  </div>
 </body>
 
 </html>
